@@ -24,17 +24,16 @@ def se_puede_llegar(grafo, origen, destino, visitados=None):
     return False
 
 def minimo_trayecto(grafo, origen, destino):
-    from collections import deque
-    queue = deque([(origen, [origen])])
+    minimo = ([(origen, [origen])])
     visitados = set()
-    while queue:
-        actual, camino = queue.popleft()
+    while minimo:
+        actual, camino = minimo.pop(0)
         if actual == destino:
             return camino
         visitados.add(actual)
         for vecino in grafo.get(actual, []):
             if vecino not in visitados:
-                queue.append((vecino, camino + [vecino]))
+                minimo.append((vecino, camino + [vecino]))
     return None
 
 def contar_zonas(grafo):
@@ -98,6 +97,6 @@ while True:
 
     elif input_opcion == "6":
         break
-    
+
     else:
         print("Opción no válida")
