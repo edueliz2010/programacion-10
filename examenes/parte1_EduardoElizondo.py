@@ -5,10 +5,12 @@ def agregar_ruta(grafo, a, b):
         grafo[b] = []
     grafo[a].append(b)
     grafo[b].append(a)
+
 def rutas_directas(grafo, ciudad):
     if ciudad in grafo:
         return sorted(grafo[ciudad])
     return []
+
 def se_puede_llegar(grafo, origen, destino, visitados=None):
     if visitados is None:
         visitados = set()
@@ -20,6 +22,7 @@ def se_puede_llegar(grafo, origen, destino, visitados=None):
             if se_puede_llegar(grafo, vecino, destino, visitados):
                 return True
     return False
+
 def minimo_trayecto(grafo, origen, destino):
     from collections import deque
     queue = deque([(origen, [origen])])
@@ -33,6 +36,7 @@ def minimo_trayecto(grafo, origen, destino):
             if vecino not in visitados:
                 queue.append((vecino, camino + [vecino]))
     return None
+
 def contar_zonas(grafo):
     visitados = set()
     zonas = 0
@@ -41,11 +45,13 @@ def contar_zonas(grafo):
             zonas += 1
             dfs(grafo, ciudad, visitados)
     return zonas
+
 def dfs(grafo, ciudad, visitados):
     visitados.add(ciudad)
     for vecino in grafo.get(ciudad, []):
         if vecino not in visitados:
             dfs(grafo, vecino, visitados)
+
 grafo = {}
 
 while True:
@@ -62,6 +68,7 @@ while True:
         ciudad = input("Ingrese la ciudad: ")
         rutas = rutas_directas(grafo, ciudad)
         print("Rutas directas:", rutas)
+
     elif input_opcion == "2":
         origen = input("Ingrese la ciudad de origen: ")
         destino = input("Ingrese la ciudad de destino: ")
@@ -69,6 +76,7 @@ while True:
             print("Si se puede llegar")
         else:
             print("No se puede llegar")
+
     elif input_opcion == "3":
         origen = input("Ingrese la ciudad de origen: ")
         destino = input("Ingrese la ciudad de destino: ")
@@ -77,15 +85,19 @@ while True:
             print("Trayecto minimo:", len(trayecto) - 1)
         else:
             print("No hay trayecto disponible")
+    
     elif input_opcion == "4":
         zonas = contar_zonas(grafo)
         print("Zonas sin conexión:", zonas)
+    
     elif input_opcion == "5":
         origen = input("Ingrese la primera ciudad: ")
         destino = input("Ingrese la segunda ciudad: ")
         agregar_ruta(grafo, origen, destino)
         print("Ruta agregada")
+
     elif input_opcion == "6":
         break
+    
     else:
         print("Opción no válida")
