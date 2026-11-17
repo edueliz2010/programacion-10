@@ -92,7 +92,7 @@ while True:
     
     elif input_opcion == "5":
         origen = input("Ingrese la primera ciudad: ")
-        destino = input("Ingrese la segunda ciudad: ")
+        destino = input("Ingrese la ciudad vecina: ")
         agregar_ruta(grafo, origen, destino)
         print("Ruta agregada")
 
