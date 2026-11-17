@@ -64,6 +64,7 @@ while True:
     input_opcion = input("Ingrese una opcion: ")
 
     if input_opcion == "1":
+        print("rutas:", grafo)
         ciudad = input("Ingrese la ciudad: ")
         rutas = rutas_directas(grafo, ciudad)
         print("Rutas directas:", rutas)
